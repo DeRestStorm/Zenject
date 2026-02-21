@@ -247,6 +247,19 @@ namespace Zenject
 
             return SceneManager.LoadSceneAsync(sceneIndex, loadMode);
         }
+        
+
+        public  AsyncOperationHandle<SceneInstance> LoadRemoteSceneAsync(
+            string key,
+            LoadSceneMode loadMode = LoadSceneMode.Single,
+            Action<DiContainer> extraBindings = null,
+            LoadSceneRelationship containerMode = LoadSceneRelationship.None,
+            Action<DiContainer> extraBindingsLate = null)
+        {
+            PrepareForLoadScene(loadMode, extraBindings, extraBindingsLate, containerMode);
+        
+            return Addressables.LoadSceneAsync(key, loadMode: loadMode, activateOnLoad: true );
+        }
     }
 }
 
